@@ -1,3 +1,5 @@
+#[path = "204.count-primes.rs"]
+mod count_primes;
 #[path = "2769.find-the-maximum-achievable-number.rs"]
 mod find_the_maximum_achievable_number;
 #[path = "22.generate-parentheses.rs"]
