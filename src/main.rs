@@ -2,14 +2,14 @@
 mod count_primes;
 #[path = "2769.find-the-maximum-achievable-number.rs"]
 mod find_the_maximum_achievable_number;
-#[path = "2769.find-the-maximum-achievable-number.rs"]
-mod find_the_maximum_achievable_number;
 #[path = "22.generate-parentheses.rs"]
 mod generate_parentheses;
 #[path = "89.gray-code.rs"]
 mod gray_code;
 #[path = "2765.longest-alternating-subarray.rs"]
 mod longest_alternating_subarray;
+#[path = "2681.power-of-heroes.rs"]
+mod power_of_heroes;
 #[path = "2766.relocate-marbles.rs"]
 mod relocate_marbles;
 #[path = "2778.sum-of-squares-of-special-elements.rs"]
