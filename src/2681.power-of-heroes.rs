@@ -44,6 +44,8 @@
 
 impl Solution {
     pub fn sum_of_power(nums: Vec<i32>) -> i32 {
+        const MOD: u128 = 1_000_000_007;
+
         let mut powers = nums;
         powers.sort();
 
@@ -51,8 +53,9 @@ impl Solution {
 
         // The first case is groups with only one element.
         for power in powers.iter() {
-            let addition: u128 = (*power as u128).wrapping_pow(3);
-            sum = sum.wrapping_add(addition);
+            let power = *power as u128;
+            let addition: u128 = power.wrapping_pow(3) % MOD;
+            sum = sum.wrapping_add(addition) % MOD;
         }
 
         // The second case if groups with more than one element. The power of a group depends only
@@ -64,22 +67,19 @@ impl Solution {
         // Thus to compute, the total number of paths involving `a` and `b` as the endpoints, we
         // need to sum (n choose 0) + (n choose 1) + ... + (n choose n), which is equal to 2^n.
         for i in 0..powers.len() {
-            let min = powers[i] as u128;
+            let min = (powers[i] as u128) % MOD;
             for j in (i + 1)..powers.len() {
-                let max = powers[j] as u128;
+                let max = (powers[j] as u128) % MOD;
+
                 let mut num_in_between = j - i - 1;
 
-                while num_in_between > 64 {
-                    let addition = (min * max * max) << 64;
-                    sum = sum.wrapping_add(addition);
-                    num_in_between -= 64;
-                }
-
-                let addition = (min * max * max) << num_in_between;
-                sum = sum.wrapping_add(addition);
+                let addition = min.wrapping_mul(max) % MOD;
+                let addition = addition.wrapping_mul(max) % MOD;
+                let addition = addition.wrapping_shl(num_in_between as u32) % MOD;
+                sum = sum.wrapping_add(addition) % MOD;
             }
         }
 
-        sum.wrapping_rem(1_000_000_007) as i32
+        sum as i32
     }
 }
